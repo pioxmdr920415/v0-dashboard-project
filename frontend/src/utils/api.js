@@ -177,4 +177,15 @@ export const getCacheStatus = async () => {
   }
 };
 
+// Toast notification function (can be imported and used in components)
+export const showToast = (message, type = 'info', duration = 3000) => {
+  // This is a utility function for showing toast notifications
+  // Implementation depends on the context/store being set up
+  // The actual toast display is handled by the ToastProvider/context
+  const event = new CustomEvent('showToast', {
+    detail: { message, type, duration }
+  });
+  window.dispatchEvent(event);
+};
+
 export default apiClient;

@@ -1,7 +1,7 @@
-"use client"
+'use client';
 
-import BulkOperationsDashboard from "../frontend/src/components/BulkOperationsDashboard"
+import App from '@/frontend/src/App';
 
-export default function SyntheticV0PageForDeployment() {
-  return <BulkOperationsDashboard />
+export default function Page() {
+  return <App />;
 }

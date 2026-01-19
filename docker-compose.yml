@@ -1,0 +1,62 @@
+version: '3.8'
+
+services:
+  mongodb:
+    image: mongo:5.0
+    container_name: dashboard-mongodb
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: password123
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - dashboard-network
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: dashboard-backend
+    ports:
+      - "8000:8000"
+    environment:
+      MONGO_URL: mongodb://admin:password123@mongodb:27017/dashboard?authSource=admin
+      DB_NAME: dashboard
+      CORS_ORIGINS: http://localhost:3000,http://frontend:3000
+      PORT: 8000
+      DEBUG: "False"
+    depends_on:
+      - mongodb
+    volumes:
+      - ./backend:/app
+    networks:
+      - dashboard-network
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: dashboard-frontend
+    ports:
+      - "3000:3000"
+    environment:
+      REACT_APP_BACKEND_URL: http://backend:8000
+      REACT_APP_GOOGLE_SHEET_ID: ${REACT_APP_GOOGLE_SHEET_ID}
+      REACT_APP_GOOGLE_API_KEY: ${REACT_APP_GOOGLE_API_KEY}
+      REACT_APP_ENV: development
+    depends_on:
+      - backend
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    networks:
+      - dashboard-network
+
+volumes:
+  mongodb_data:
+
+networks:
+  dashboard-network:
+    driver: bridge
