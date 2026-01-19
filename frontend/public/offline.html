@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="/icons/icon-72x72.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#007bff" />
+    <meta name="description" content="MDRRMO Pio Duran - Disaster Risk Reduction and Management Office" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="MDRRMO Pio Duran" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="msapplication-TileColor" content="#007bff" />
+    <meta name="msapplication-TileImage" content="/icons/icon-144x144.png" />
+    <meta name="msapplication-config" content="/browserconfig.xml" />
+    
+    <link rel="apple-touch-icon" href="/icons/icon-152x152.png" />
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="shortcut icon" href="/icons/icon-72x72.png" />
+    
+    <title>MDRRMO Pio Duran - Offline</title>
+    
+    <style>
+        :root {
+            --primary-color: #007bff;
+            --secondary-color: #6c757d;
+            --background-color: #f8f9fa;
+            --text-color: #333;
+            --card-bg: #ffffff;
+            --border-color: #dee2e6;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        
+        .offline-header {
+            background: linear-gradient(135deg, var(--primary-color), #0056b3);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .offline-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            opacity: 0.8;
+        }
+        
+        .offline-title {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+        
+        .offline-subtitle {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        .main-content {
+            flex: 1;
+            padding: 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        
+        .card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border: 1px solid var(--border-color);
+        }
+        
+        .card h3 {
+            margin-top: 0;
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 0.5rem;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .feature-item {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 8px;
+            border-left: 4px solid var(--primary-color);
+        }
+        
+        .feature-item h4 {
+            margin: 0 0 0.5rem 0;
+            font-size: 1rem;
+        }
+        
+        .feature-item p {
+            margin: 0;
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        .actions {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+        }
+        
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: #0056b3;
+            transform: translateY(-1px);
+        }
+        
+        .btn-secondary {
+            background-color: var(--secondary-color);
+            color: white;
+        }
+        
+        .btn-secondary:hover {
+            background-color: #545b62;
+            transform: translateY(-1px);
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+        }
+        
+        .btn-outline:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .status-indicator {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+        
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: #ffc107;
+            box-shadow: 0 0 0 2px rgba(255, 193, 7, 0.3);
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(255, 193, 7, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(255, 193, 7, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(255, 193, 7, 0); }
+        }
+        
+        .footer {
+            background: #343a40;
+            color: #fff;
+            padding: 1rem;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+        
+        .footer a {
+            color: #fff;
+            text-decoration: none;
+        }
+        
+        .footer a:hover {
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 768px) {
+            .main-content {
+                padding: 1rem;
+            }
+            
+            .offline-title {
+                font-size: 1.5rem;
+            }
+            
+            .offline-subtitle {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="offline-header">
+        <div class="offline-icon">📱</div>
+        <h1 class="offline-title">You're Offline</h1>
+        <p class="offline-subtitle">Don't worry! You can still access cached content and your data will sync when you're back online.</p>
+    </div>
+
+    <main class="main-content">
+        <div class="card">
+            <div class="status-indicator">
+                <div class="status-dot"></div>
+                <span>Currently working in offline mode</span>
+            </div>
+            
+            <h3>What You Can Do Offline</h3>
+            <div class="features-grid">
+                <div class="feature-item">
+                    <h4>📋 View Cached Data</h4>
+                    <p>Access previously loaded documents, maps, and dashboard information</p>
+                </div>
+                <div class="feature-item">
+                    <h4>🗺️ Browse Maps</h4>
+                    <p>View cached map tiles and geographic data for your area</p>
+                </div>
+                <div class="feature-item">
+                    <h4>📄 Read Documents</h4>
+                    <p>Access downloaded documents and reports</p>
+                </div>
+                <div class="feature-item">
+                    <h4>📊 Check Status</h4>
+                    <p>View cached status updates and notifications</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>What's Being Prepared</h3>
+            <p>Your application is working in the background to:</p>
+            <ul style="padding-left: 1.5rem; margin: 1rem 0;">
+                <li>Cache essential data for offline access</li>
+                <li>Prepare map tiles for your area</li>
+                <li>Store recent documents and updates</li>
+                <li>Queue any pending operations for when you're back online</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h3>Get Back Online</h3>
+            <div class="actions">
+                <button class="btn btn-primary" onclick="checkConnection()">
+                    Check Connection
+                </button>
+                <button class="btn btn-outline" onclick="window.location.href='/'">
+                    Try to Reload
+                </button>
+                <button class="btn btn-secondary" onclick="showHelp()">
+                    Help & Support
+                </button>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>Install as Desktop App</h3>
+            <p>For the best offline experience, install this application on your device:</p>
+            <div class="actions">
+                <button class="btn btn-primary" onclick="showInstallPrompt()">
+                    Install App
+                </button>
+                <button class="btn btn-outline" onclick="showInstructions()">
+                    How to Install
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>MDRRMO Pio Duran • Disaster Risk Reduction and Management Office</p>
+        <p>For support, contact your system administrator or check our 
+            <a href="#" onclick="showHelp()">Help Center</a>
+        </p>
+    </footer>
+
+    <script>
+        // Connection checking
+        function checkConnection() {
+            if (navigator.onLine) {
+                window.location.href = '/';
+            } else {
+                alert('Still offline. Please check your internet connection and try again.');
+            }
+        }
+
+        // Install prompt
+        let deferredPrompt;
+        
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+        });
+
+        function showInstallPrompt() {
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                deferredPrompt.userChoice.then((choiceResult) => {
+                    if (choiceResult.outcome === 'accepted') {
+                        console.log('User accepted the install prompt');
+                    }
+                    deferredPrompt = null;
+                });
+            } else {
+                alert('Install prompt not available. Please use your browser\'s menu to install this app.');
+            }
+        }
+
+        // Help and instructions
+        function showHelp() {
+            alert('Help Center:\n\n1. Check your internet connection\n2. Try refreshing the page\n3. If issues persist, contact support\n4. For offline features, ensure you have visited the app while online first');
+        }
+
+        function showInstructions() {
+            alert('To install this app:\n\nFor Chrome/Edge:\n1. Click the three dots menu\n2. Select "Install [App Name]"\n3. Follow the prompts\n\nFor Firefox:\n1. Click the menu button\n2. Select "Install [App Name]"\n\nFor Safari:\n1. Click the share button\n2. Select "Add to Home Screen"');
+        }
+
+        // Monitor connection status
+        window.addEventListener('online', () => {
+            const statusIndicator = document.querySelector('.status-indicator');
+            if (statusIndicator) {
+                statusIndicator.innerHTML = `
+                    <div style="background-color: #28a745; width: 8px; height: 8px; border-radius: 50%;"></div>
+                    <span>Connection restored! Redirecting...</span>
+                `;
+                setTimeout(() => {
+                    window.location.href = '/';
+                }, 2000);
+            }
+        });
+
+        window.addEventListener('offline', () => {
+            const statusIndicator = document.querySelector('.status-indicator');
+            if (statusIndicator) {
+                statusIndicator.innerHTML = `
+                    <div style="background-color: #ffc107; width: 8px; height: 8px; border-radius: 50%;"></div>
+                    <span>You are now offline</span>
+                `;
+            }
+        });
+
+        // Service Worker registration
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/service-worker.js')
+                    .then((registration) => {
+                        console.log('SW registered:', registration);
+                    })
+                    .catch((error) => {
+                        console.log('SW registration failed:', error);
+                    });
+            });
+        }
+    </script>
+</body>
+</html>
