@@ -13,9 +13,6 @@
   ],
   "license": "MIT",
   "author": "MDRRMO Pio Duran",
-  "workspaces": [
-    "frontend"
-  ],
   "scripts": {
     "build": "cd frontend && yarn build",
     "build:backend": "cd backend && pip install -r requirements.txt",
