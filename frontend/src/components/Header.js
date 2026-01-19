@@ -123,7 +123,7 @@ const Header = () => {
                   >
                     <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
                     <img
-                      src="https://res.cloudinary.com/dedcmctqk/image/upload/v1758626524/logome_qttbxo.webp"
+                      src="/images/design-mode/logome_qttbxo.webp"
                       alt="Logo"
                       className="w-full h-full object-contain p-1.5 relative z-10 drop-shadow-2xl"
                     />
